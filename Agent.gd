@@ -44,6 +44,7 @@ func _physics_process(_delta):
 		!nav_agent.is_target_reachable()
 		and abs(nav_agent.get_final_position().x - global_position.x) < EPSILON
 	):
+		nav_agent.target_position = nav_agent.target_position
 		return
 
 	var target_pos_global = nav_agent.get_next_path_position()
