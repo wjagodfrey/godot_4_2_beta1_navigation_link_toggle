@@ -42,5 +42,3 @@ func apply_state():
 		static_body.collision_layer = disabled_mask
 		mesh.material.albedo_color = disabled_color
 
-
-

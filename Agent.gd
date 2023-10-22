@@ -8,16 +8,13 @@ const EPSILON = 0.1
 	set(x):
 		walk = x
 		if not walk:
-			global_position = target_1.global_position
-			global_rotation = Vector3.ZERO
+			reset_agent()
 
 @export_group("Controls")
-@warning_ignore("UNUSED_PRIVATE_CLASS_VARIABLE")
-@export var _set_target_1: bool:
+@warning_ignore("UNUSED_PRIVATE_CLASS_VARIABLE") @export var _set_target_1: bool:
 	set(_x):
 		nav_agent.target_position = target_1.global_position
-@warning_ignore("UNUSED_PRIVATE_CLASS_VARIABLE")
-@export var _set_target_2: bool:
+@warning_ignore("UNUSED_PRIVATE_CLASS_VARIABLE") @export var _set_target_2: bool:
 	set(_x):
 		nav_agent.target_position = target_2.global_position
 
@@ -25,6 +22,7 @@ const EPSILON = 0.1
 @export var target_1: Marker3D
 @export var target_2: Marker3D
 @export var nav_agent: NavigationAgent3D
+@export var reset_agent_button: Button
 @export var speed: float = 1
 
 
@@ -32,6 +30,7 @@ func _ready():
 	if Engine.is_editor_hint():
 		return
 	walk = true
+	reset_agent_button.pressed.connect(reset_agent)
 
 
 func _physics_process(_delta):
@@ -65,3 +64,8 @@ func update_target():
 		nav_agent.target_position = target_2.global_position
 	elif abs(global_position.x - target_2.global_position.x) < EPSILON:
 		nav_agent.target_position = target_1.global_position
+
+
+func reset_agent():
+	global_position = target_1.global_position
+	global_rotation = Vector3.ZERO
