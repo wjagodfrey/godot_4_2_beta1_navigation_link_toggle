@@ -24,12 +24,10 @@ func _ready():
 	if Engine.is_editor_hint():
 		return
 	button.pressed.connect(toggle_state)
-	apply_state()
 
 
 func toggle_state():
 	enabled = !enabled
-	apply_state()
 
 
 func apply_state():
